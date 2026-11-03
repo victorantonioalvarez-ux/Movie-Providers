@@ -9,6 +9,11 @@ class MoviesProvider extends ChangeNotifier {
     this.getOnDisplayMovies();
   }
 
+  String _baseURL = "api.themoviedb.org";
+  String _APIKey = "337b0f0ceb642f99a5bb8297de788518";
+  String _language = "en-US";
+  String _page = "1";
+
   getOnDisplayMovies() async {
     print("getOnDisplayMovies");
     var url =

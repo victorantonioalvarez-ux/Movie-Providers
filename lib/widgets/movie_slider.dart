@@ -7,7 +7,7 @@ class MovieSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 270,
+      height: 300,
       // color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class _MoviePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 130,
-      height: 190,
+      height: 150,
       // color: Colors.green,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(

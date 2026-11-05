@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/models/now_playing_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
   MoviesProvider() {
@@ -11,23 +13,26 @@ class MoviesProvider extends ChangeNotifier {
 
   String _baseURL = "api.themoviedb.org";
   String _APIKey = "337b0f0ceb642f99a5bb8297de788518";
-  String _language = "en-US";
+  String _language = "es-ES";
   String _page = "1";
+
+  List<Movie> onDisplayMovies = [];
 
   getOnDisplayMovies() async {
     print("getOnDisplayMovies");
     var url =
-        Uri.https('www.googleapis.com', '/books/v1/volumes', {'q': '{http}'});
-
+        Uri.https(_baseURL, '3/movie/now_playing', {
+          'api_key': _APIKey,
+          'language': _language,
+          'page': _page
+          });
+  
     // Await the http get response, then decode the json-formatted response.
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponse =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
-      var itemCount = jsonResponse['totalItems'];
-      print('Number of books about http: $itemCount.');
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
+    final result = await http.get(url);
+
+    final nowPlayingResponse = NowPlayingResponse.fromJson(result.body);
+  
+    onDisplayMovies = nowPlayingResponse.results;
+
   }
 }

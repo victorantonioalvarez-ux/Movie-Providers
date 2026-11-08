@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/movie.dart';
 
 class MovieSlider extends StatelessWidget {
-  // const MovieSlider({Key? key}) : super(key: key);
+  final List<Movie> movies;
+
+  const MovieSlider({Key? key, required this.movies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +24,11 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 20,
-                itemBuilder: (_, int index) => _MoviePoster()),
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  final movie = movies[index];
+                  return _MoviePoster(movie: movie);
+                }),
           )
         ],
       ),
@@ -31,7 +37,11 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({Key? key}) : super(key: key);
+  final Movie movie;
+  //const _MoviePoster({Key? key}) : super(key: key);
+  const _MoviePoster({Key? key, required this.movie}) : super(key: key);
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +54,12 @@ class _MoviePoster extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details',
-                arguments: 'detalls peli'),
+                arguments: movie),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage('https://placehold.co/300x400/png'),
+                image: NetworkImage(movie.fullPosterPath),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -60,7 +70,7 @@ class _MoviePoster extends StatelessWidget {
             height: 5,
           ),
           Text(
-            'Star Wars: El retorno del Jedi',
+            movie.originalTitle,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

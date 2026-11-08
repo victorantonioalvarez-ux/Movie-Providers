@@ -34,5 +34,6 @@ class MoviesProvider extends ChangeNotifier {
   
     onDisplayMovies = nowPlayingResponse.results;
 
+    notifyListeners();
   }
 }

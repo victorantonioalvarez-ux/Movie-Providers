@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/now_playing_response.dart';
@@ -8,7 +7,7 @@ import 'package:movies_app/models/now_playing_response.dart';
 class MoviesProvider extends ChangeNotifier {
   MoviesProvider() {
     print("Movies Provide inicialitzat!");
-    this.getOnDisplayMovies();
+    getOnDisplayMovies();
   }
 
   String _baseURL = "api.themoviedb.org";

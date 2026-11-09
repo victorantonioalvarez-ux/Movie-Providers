@@ -6,8 +6,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Canviar després per una instància de Peli
-    final Movie peli =
-        ModalRoute.of(context)?.settings.arguments as Movie;
+    final Movie peli = ModalRoute.of(context)?.settings.arguments as Movie;
 
     return Scaffold(
       body: CustomScrollView(
@@ -57,7 +56,8 @@ class _CustomAppBar extends StatelessWidget {
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
-          image: NetworkImage(movie.posterPath ?? 'https://placehold.co/500x300/png'),
+          image: NetworkImage(
+              movie.fullPosterPath ?? 'https://placehold.co/500x300/png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -83,7 +83,7 @@ class _PosterAndTitile extends StatelessWidget {
             child: FadeInImage(
               placeholder: const AssetImage('assets/loading.gif'),
               image: NetworkImage(
-                movie.posterPath ?? 'https://placehold.co/150x220/png',
+                movie.fullPosterPath ?? 'https://placehold.co/150x220/png',
               ),
               height: 150,
             ),
